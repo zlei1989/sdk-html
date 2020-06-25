@@ -1,0 +1,69 @@
+{
+	"release": {
+		"version": 259,
+		"compatiable": 259
+	},
+	"version": 65535,
+	"scripts": {
+		"BOOTSTRAP": [
+			"src.local/VersionControl.js",
+			"src.local/VersionControl.Loader.js"
+		],
+		"HTML": [
+			"src.local/UI-Styles.html",
+			"src.local/UI-About.html",
+			"src.local/UI-Browser.html",
+			"src.local/UI-Center.html",
+			"src.local/UI-CenterEvents.html",
+			"src.local/UI-CenterMessages.html",
+			"src.local/UI-CenterModifyEmail.html",
+			"src.local/UI-CenterModifyPassword.html",
+			"src.local/UI-CenterModifyPhone.html",
+			"src.local/UI-CenterPays.html",
+			"src.local/UI-CenterSetId.html",
+			"src.local/UI-CenterSettings.html",
+			"src.local/UI-Exit.html",
+			"src.local/UI-ForgetPassword.html",
+			"src.local/UI-Login.html",
+			"src.local/UI-Logout.html",
+			"src.local/UI-Pay.html",
+			"src.local/UI-Push.html",
+			"src.local/UI-Register.html"
+		],
+		"JAVASCRIPT": [
+			"src.local/ICCGAME_API_ANDROID.js",
+			"src.local/ICCGAME_API_IOS.js",
+			"src.local/ICCGAME_API.js",
+			"src.local/ICCGAME_CAPTCHA.js",
+			"src.local/ICCGAME_STORAGE.js",
+			"src.local/ICCGAME_VERIFY.js",
+			"src.local/ICCGAME_WAIT.js",
+			"src.local/PASSPORT.js",
+			"src.local/PASSPORT.Session.js",
+			"src.local/PASSPORT.Session.prototype.js",
+			"src.local/PASSPORT.Session.prototype.ajaxPost.js",
+			"src.local/PASSPORT.Session.prototype.eventHanders.js",
+			"src.local/PASSPORT.ModuleAbstract.js",
+			"src.local/PASSPORT.AboutModule.js",
+			"src.local/PASSPORT.BrowserModule.js",
+			"src.local/PASSPORT.CenterEventsModule.js",
+			"src.local/PASSPORT.CenterMessagesModule.js",
+			"src.local/PASSPORT.CenterModifyEmailModule.js",
+			"src.local/PASSPORT.CenterModifyPasswordModule.js",
+			"src.local/PASSPORT.CenterModifyPhoneModule.js",
+			"src.local/PASSPORT.CenterPaysModule.js",
+			"src.local/PASSPORT.CenterSetIdModule.js",
+			"src.local/PASSPORT.CenterSettingsModule.js",
+			"src.local/PASSPORT.CenterModule.js",
+			"src.local/PASSPORT.ExitModule.js",
+			"src.local/PASSPORT.ForgetPasswordModule.js",
+			"src.local/PASSPORT.LoginModule.js",
+			"src.local/PASSPORT.LogoutModule.js",
+			"src.local/PASSPORT.PayModule.js",
+			"src.local/PASSPORT.PushModule.js",
+			"src.local/PASSPORT.RegisterModule.js",
+			"src.local/INIT.js"
+		]
+	},
+	"compatiable": 65535
+}

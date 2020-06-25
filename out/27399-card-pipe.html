@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<script src="jquery.min.js"></script>
+		<script src="iccgame.js"></script>
+		<style>
+			body, html{width:100%;height:100%;overflow:auto;margin:0}
+			body{background-color:#f4f4f5;color:#4e5258}
+			form p:last-of-type{margin:2em 0 2em 0;text-align:center}
+			form{margin:2em}
+			input{font-size:16px}
+			input[type=submit]{background-color:#f2c156;border-radius:5px;border:none;box-sizing:border-box;color:#fff;font-size:16px;outline:0;height:3em;width:100%}
+			input[type=submit]:hover{background-color:#dca631}
+			input[type=text],select{border:solid #dfdfdf 1px;box-sizing:border-box;font-size:16px;height:2.5em;outline:0;padding:0 .5em;width:100%}
+			input[type=text]:focus,select:focus{border:solid gray 1px}
+			input[type=text]{width:100%}
+			label{line-height:150%;font-size:14px;}
+			p{margin:.5em 0 1em 0}
+			.error:empty{display:none}
+			.error{background-color:#f00;color:white;line-height:200%;text-indent:0.5em;}
+			.overlay {position:fixed;top:0;right:0;bottom:0;left:0;z-index:999;visibility:hidden;background-color:transparent;transition-duration:.4s;transition-property:background-color,visibility}
+			.wait .overlay {background-color:rgba(255,255,255,.381);visibility:visible}
+		</style>
+	</head>
+	<body>
+		<div class="overlay"></div>
+		<form action="/index.php" autocomplete="off" method="post" onsubmit="return false;">
+			<p class="error"></p>
+			<p><label>一卡通卡号</label><br/><input type="text" pattern="[a-zA-Z]{2}[0-9]{8,10}" name="card_number" placeholder="请输入充值卡卡号" maxlength="12" autofocus="on" autocomplete="off" required="on" value=""/></p>
+			<p><label>一卡通密码</label><br/><input type="text" pattern="[0-9]{12,15}" name="card_password" placeholder="请输入充值卡密码" maxlength="15" autocomplete="off" required="on" value=""/></p>
+			<p><label>支付金额</label><br/><input type="text" id="show_amount" readonly="on"/></p>
+			<p><input type="submit" value="支付"/></p>
+			<input type="hidden" name="module" value="GAME.Charges.Card27399"/>
+		</form>
+		<script>
+			PARAMS = new Object();
+			$(function () {
+				// 自动填充参数
+				var matches = location.search.match(/(&|\?)([a-z][0-9a-z\_]*)=[^&]*/ig);
+				if (matches) {
+					for (var i in matches) {
+						var value = matches[i].match(/(&|\?)([a-z][0-9a-z\_]*)=([^&]*)/i);
+						PARAMS[value[2]] = decodeURI(value[3]);
+					}
+				}
+				// 刷新 金额显示
+				var amount = parseInt(PARAMS["chg_amount"]);
+				if (isNaN(amount)) {
+					amount = 9999;
+				} else {
+					amount /= 100;
+				}
+				$("#show_amount").val(amount.toFixed(2));
+				// 监视提交
+				$("form").on("submit", function (event) {
+					// 终止操作
+					event.preventDefault();
+					event.stopImmediatePropagation();
+					event.stopPropagation();
+					// 构造请求
+					var data = new Object();
+					$(":input[name]").each(function () {
+						data[this.name] = this.value;
+					});
+					for (var i in PARAMS) {
+						data[i] = PARAMS[i];
+					}
+					$.ajax({
+						beforeSend: function () {
+							console.log("ajax request.");
+							$(document.body).addClass("wait");
+							$(".error").text("");
+						},
+						cache: false,
+						complete: function (jqXHR, textStatus) {
+							$(document.body).removeClass("wait");
+							console.log("ajax complete.");
+						},
+						error: function (jqXHR, textStatus, errorThrown) {
+							console.warn("ajax error.");
+						},
+						data: data,
+						dataType: "json",
+						method: "post",
+						success: function (data, textStatus) {
+							console.log("ajax response. ");
+							for (var i in data) {
+								console.log(data[i]);
+								switch (data[i].name) {
+									case "ICC_Exception":
+										var exception = data[i].args[0];
+										if ("ZLeiPlus\\Database\\Exception\\ValidationException" === exception.type) {
+											$(".error").text(exception.message);
+										}
+										break;
+									case "ICC_CallCardOf27399":
+										var that = window.top;
+										that.$(that.document.body).trigger("ICC_CallHander");
+										break;
+								}
+							}
+						},
+						url: event.target.action
+					});
+				});
+//				$("form").submit();
+			});
+		</script>
+	</body>
+</html>

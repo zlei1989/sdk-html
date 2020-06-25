@@ -1,0 +1,19 @@
+<main id="center-set-id" class="page module">
+	<div class="header">
+		<!--<a href="#cancel" class="icon back btn"></a>-->
+		<h1>实名认证</h1>
+	</div>
+	<div class="content"><form autocomplete="off" novalidate="on">
+			<fieldset>
+				<label>姓名</label>
+				<input type="text" name="acct_realname" maxlength="24" placeholder="请输入您的真实姓名" autofocus="on" required="on"/>
+			</fieldset><fieldset>
+				<label>身份证号</label>
+				<input type="text" name="acct_card_id" maxlength="18" placeholder="请输入您的真实身份证号" autofocus="on" pattern="^[0-9xX]{18}$" required="on"/>
+			</fieldset><fieldset>
+				<label class="warning">请认真核实信息，提交后不可修改！<br/>应文化部要求，认证完成后才能游戏。</label>
+			</fieldset><fieldset>
+				<input type="submit" value="提 交"/>
+			</fieldset>
+		</form></div>
+</main>

@@ -1,0 +1,24 @@
+<main id="register" class="page module">
+	<div class="header">
+		<a href="#cancel" class="icon back"></a>
+		<h1>快速注册|试玩转正</h1>
+	</div>
+	<div class="content">
+		<form autocomplete="off" novalidate="on">
+			<fieldset>
+				<label>ICCGAME 通行证</label>
+				<input type="text" name="acct_name" maxlength="128" placeholder="请输入手机号或邮箱" autocapitalize="off" autofocus="on" pattern="^[a-zA-Z0-9\.\-_@]{6,}$" required="on"/>
+			</fieldset><fieldset>
+				<label>通行证密码</label>
+				<input type="password" name="acct_password" maxlength="48" placeholder="请输入通行证密码" pattern=".{6,}" required="on"/>
+			</fieldset><fieldset>
+				<label>确认通行证密码</label>
+				<input type="password" name="acct_password2" maxlength="48" placeholder="请确认通行证密码" pattern=".{6,}" required="on"/>
+			</fieldset><fieldset class="guest-prompt">
+				<label class="warning">您当前为试玩账号，为避免因卸载、更新等操作引发数据遗失，请尽快转为正式账号。</label>
+			</fieldset><fieldset>
+				<input type="submit" value="提 交"/>
+			</fieldset>
+		</form>
+	</div>
+</main>

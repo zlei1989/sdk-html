@@ -1,0 +1,268 @@
+<!-- 百度统计 -->
+<script>
+	var _hmt = _hmt || [];
+	(function () {
+		var hm = document.createElement("script");
+		hm.src = "//hm.baidu.com/hm.js?660ef8c8f880ca5d5781f2d9e6ab045e";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	})();
+</script>
+
+<!-- 全局样式 -->
+<style>
+	a:focus, input:focus{outline:none}
+	body,html{width:100%;height:100%}
+	body{-webkit-touch-callout:none;-webkit-text-size-adjust:none;-webkit-user-select:none;-webkit-highlight:none;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+	body{color:#212121;margin:0;overflow:hidden}
+	input,select,textarea{font-size:16px}
+	input::-webkit-input-placeholder,input:focus::-webkit-input-placeholder{color:#a9a9a9}
+	input{-webkit-appearance:none}
+	::-webkit-validation-bubble-message{display:none}
+</style>
+
+<!-- 全新UI -->
+<style>
+	/* 模块框架 */
+	.module:not(.active){visibility:hidden;}
+	.module{position:absolute;top:0;right:0;bottom:0;left:0;overflow:auto}
+	.page .header{background:#455a64;color:#fff}
+	.page .header h1{margin:0;text-align:center;font-size:1em;line-height:250%}
+	.page .header a{width:2.5em;height:2.5em;background-size:2em}
+	.page .header a:first-of-type{position:absolute;left:0}
+	.page .header a:last-of-type{position:absolute;right:0}
+	.page .content{position:absolute;top:2.5em;right:0;bottom:0;left:0;overflow:auto;background-color:#fff}
+
+	/* 表单框架 */
+	form{padding:1em}
+	fieldset input:not([type=submit]):not([type=button]),fieldset textarea{overflow:hidden;-webkit-box-sizing:border-box;padding:.5em;width:100%;height:2em;outline:0;border:solid 1px #ddd;color:#000}
+	fieldset input:not([type=submit]):not([type=button]):focus,fieldset textarea:focus{border-color:#009688}
+	fieldset input:only-child{margin:.5em 0 0 0}
+	fieldset input[type=submit]{padding:0 1em;height:2em;border:solid 1px #ddd;background-color:#ededed;font-size:1em}
+	fieldset label{display:block;font-size:.8em;line-height:200%}
+	fieldset textarea{padding:.5em;min-height:5em;line-height:140%;resize:none}
+	fieldset{margin:.25em 0;padding:0;border:none}
+
+	/* 背景遮挡 */
+	.overlay,.overlay-black,.overlay-white{position:fixed;top:0;right:0;bottom:0;left:0;z-index:0;overflow:hidden;visibility:hidden;background-color:transparent;-webkit-transition:400ms 100ms;-webkit-transform:translate3d(0,0,0)}
+	.overlay-black.show,.overlay-white.show,.overlay.show{visibility:visible}
+	.overlay-black.show{background-color:rgba(0,0,0,.381)}
+	.overlay-white.show{background-color:rgba(255,255,255,.381)}
+
+	/* 等待加载 */
+	.wait ul li{padding:0 1em 0 .5em;background-color:red;color:#fff;list-style:none;line-height:200%}
+	.wait ul{position:absolute;top:1em;right:0;font-size:12px}
+
+	/* 弹出窗口 */
+	#push .text .content{margin:0 .5em;font-size:1em;line-height:150%}
+	#push .text .inside{position:absolute;top:1em;right:.5em;bottom:1em;left:.5em;overflow:auto;padding:0 .5em}
+	#push .text h2{margin:0 0 1em 0;padding:0 0 .5em .5em;border-bottom:#888 dashed 1px;text-align:center;font-size:1.5em;line-height:150%}
+	#push .text p{margin:.5em 0}
+	#push .text{position:absolute;top:2em;right:2em;bottom:2em;left:2em;-webkit-border-radius:.25em;-webkit-box-shadow:0 0 1em rgba(0,0,0,.125);background-color:#fff;overflow:auto}
+	#push .text{visibility:hidden;opacity:0;-webkit-transform:scale(.618)}
+	#push a[href="#cancel"]{position:absolute;right:.318em;top:.318em;z-index:99}
+	#push.show .text{-webkit-transition:400ms cubic-bezier(.175,.885,.32,1.275) 100ms;}
+	#push.show .text{visibility:visible;opacity:1;-webkit-transform:scale(1)}
+
+	/* 登录界面 */
+	#login.module.active{visibility:visible;background-color:rgba(0,0,0,.381)}
+	#login.module:not(.active){-webkit-transition:none}
+
+	/* 登录界面 */
+	#logout.module.active{visibility:visible;background-color:rgba(0,0,0,.381)}
+	#logout.module:not(.active){-webkit-transition:none}
+
+	/* 退出界面 */
+	#exit.module.active{visibility:visible;background-color:rgba(0,0,0,.381)}
+	#exit.module:not(.active){-webkit-transition:none}
+
+	/* 确认对话框 */
+	.confirm-dialog div a:last-child:not(:only-child){margin:0}
+	.confirm-dialog div a{display:inline-block;margin:0 4% 0 0;width:48%;-webkit-border-radius:.25em;background-color:#558b2f;color:#fff;text-align:center;text-decoration:none;font-size:.875em;line-height:200%;z-index:99}
+	.confirm-dialog h2{margin:0;font-size:1em;line-height:220%}
+	.confirm-dialog h3{margin:0 0 2em 0;color:#616161;font-size:.875em;line-height:140%}
+	.confirm-dialog {position:fixed;top:50%;left:50%;-webkit-box-sizing:border-box;margin-top:-4.399em;margin-left:-9.5em;padding:1em;width:19em;height:8.797em;-webkit-border-radius:.25em;background-color:#fff;box-shadow:0 0 1em rgba(0,0,0,.5);-webkit-transform:translate3d(0,0,0)}
+
+	/* 验证对话框 */
+	.overlay-black .verify-owner{visibility:hidden}
+	.overlay-black.show .verify-owner{visibility:visible}
+	.verify-owner div a.disabled{background-color:#b3cf9b;color:#d4e4c7}
+	.verify-owner div a:last-child:not(:only-child){margin:0}
+	.verify-owner div a{display:inline-block;margin:0 4% 0 0;width:48%;-webkit-border-radius:.25em;background-color:#558b2f;color:#fff;text-align:center;text-decoration:none;font-size:.875em;line-height:200%;z-index:99}
+	.verify-owner h2{margin:0;font-size:1em;line-height:220%}
+	.verify-owner h3 a.disabled{color:#616161;text-decoration:none}
+	.verify-owner h3 a{float:right;color:#558b2f;font-weight:400;font-style:italic}
+	.verify-owner h3{margin:0;color:#616161;font-size:.875em;line-height:140%}
+	.verify-owner input[type=number]{-webkit-box-sizing:border-box;margin:.75em 0;padding-left:.5em;width:100%;height:2em;outline:0;border-top:none;border-right:none;border-bottom:solid .125em #009688;border-left:none;font-size:1em}
+	.verify-owner{position:fixed;top:50%;left:50%;-webkit-box-sizing:border-box;margin-top:-5.34375em;margin-left:-9.5em;padding:1em;width:19em;height:10.6875em;-webkit-border-radius:.25em;background-color:#fff;box-shadow:0 0 1em rgba(0,0,0,.5);-webkit-transform:translate3d(0,0,0)}
+
+	/* 图片验证码 */
+	.CAPTCHA a[href="#reset"]{position:absolute;right:.318em;top:.318em;z-index:99}
+	.CAPTCHA h2{position:absolute;top:7.5em; margin:0;width:100%;color:#c30;text-align:center;text-shadow:0 0 1em #fff;font-size:.875em;line-height:100%}
+	.CAPTCHA img{position:absolute;left:0;top:0;z-index:0}
+	.CAPTCHA li span{display:inline-block;margin:.25em 0 0 .25em;width:1.5em;height:1.5em;-webkit-border-radius:50%;background-color:#689f38;color:#fff;text-align:center;font-size:2em;font-family:Arial;line-height:150%;opacity:0;-webkit-transition:200ms;-webkit-transform:scale(2)}
+	.CAPTCHA li.checked span{opacity:1;-webkit-transform:scale(1)}
+	.CAPTCHA li.checked.sort-0 span:after{content:"1"}
+	.CAPTCHA li.checked.sort-1 span:after{content:"2"}
+	.CAPTCHA li.checked.sort-2 span:after{content:"3"}
+	.CAPTCHA li.checked.sort-3 span:after{content:"4"}
+	.CAPTCHA li{float:left;display:block;width:4em;height:4em}
+	.CAPTCHA ul{position:absolute;top:50%;overflow:visible;margin:0;padding:0;list-style:none}
+	.CAPTCHA.loading a,.CAPTCHA.loading h2{display:none}
+	.CAPTCHA{position:fixed;left:50%;top:50%;overflow:hidden;margin-top:-128px;margin-left:-128px;width:256px;height:256px;-webkit-border-radius:.25em;background:no-repeat center #fff;box-shadow:0 0 1em rgba(0,0,0,.5)}
+	.CAPTCHA{-webkit-transition:400ms 100ms}
+	.overlay-white .CAPTCHA{visibility:hidden;opacity:0;-webkit-transform:scale(.618) translate3d(0,100%,0)}
+	.overlay-white.show .CAPTCHA{visibility:visible;opacity:1;-webkit-transform:scale(1) translate3d(0,0,0)}
+
+	/* 找回密码 步骤切换 */
+	#forget-password.passed .step-1,#forget-password .step-2{display:none}
+	#forget-password.passed .step-2{display:block}
+
+	/* 内嵌浏览器 */
+	#browser iframe{width:100%;height:100%;border:none;background-color:#fff}
+
+	/* 账号中心 */
+	#center .content:not(.loaded) nav {display:none}
+	#center .content:not(.loaded) .account {display:none}
+	#center .account{margin:0 0 3em 0}
+	#center .account h3 {margin:0;font-size:1.5em;line-height:200%;vertical-align:top;}
+	#center .account h4 {margin:0;font-size:1em;font-weight:normal}
+
+	/* 用户消息 */
+	#center-messages .content ol h5 span{position:absolute;right:0;font-size:.75em}
+	#center-messages .content ol h5{position:relative;margin:0;font-weight:400;font-size:1em;line-height:150%}
+	#center-messages .content ol li.unclick h5{font-weight:700}
+	#center-messages .content ol li{margin:0;padding:.85em 1em;border-bottom:1px solid #eee}
+	#center-messages .content ol p{overflow:hidden;margin:0;color:#7f7f7f;text-overflow:ellipsis;white-space:nowrap;font-size:.75em;line-height:200%}
+	#center-messages .content ol{margin:0;padding:0;list-style:none}
+	#center-messages .msg-viewer .msg_created{line-height:200%;font-size:.75em;color:gray}
+	#center-messages .msg-viewer .stage{position:absolute;top:2.5em;right:0;bottom:0;left:0;padding:1em;background:#fff;-webkit-box-shadow:0 0 2.5em rgba(0,0,0,.125);overflow:auto}
+	#center-messages .msg-viewer h2{margin:0;font-size:1.5em;line-height:150%}
+	#center-messages .msg-viewer .stage{-webkit-transition:400ms;-webkit-transform:translate3d(0,0,0);visibility:visible}
+	#center-messages .msg-viewer:not(.show) .stage{-webkit-transform:translate3d(100%,0,0);visibility:hidden}
+	#center-messages .content ol:empty:after{content:"您目前没有消息";line-height:400%;display:block;text-align:center}
+
+	/* 活动列表 */
+	#center-events .content ol h5 span{position:absolute;right:0;font-size:.75em}
+	#center-events .content ol h5{position:relative;margin:0;font-weight:400;font-size:1em;line-height:150%}
+	#center-events .content ol li{margin:0;padding:.85em 1em;border-bottom:1px solid #eee}
+	#center-events .content ol p{overflow:hidden;margin:0;color:#7f7f7f;text-overflow:ellipsis;white-space:nowrap;font-size:.75em;line-height:200%}
+	#center-events .content ol{margin:0;padding:0;list-style:none}
+	#center-events .evnt-viewer .msg_created{line-height:200%;font-size:.75em;color:gray}
+	#center-events .evnt-viewer .stage{position:absolute;top:2.5em;right:0;bottom:0;left:0;padding:1em;background:#fff;-webkit-box-shadow:0 0 2.5em rgba(0,0,0,.125);overflow:auto}
+	#center-events .evnt-viewer h2{margin:0;font-size:1.5em;line-height:150%}
+	#center-events .evnt-viewer .stage{-webkit-transition:400ms;-webkit-transform:translate3d(0,0,0);visibility:visible}
+	#center-events .evnt-viewer:not(.show) .stage{-webkit-transform:translate3d(100%,0,0);visibility:hidden}
+	#center-events .content ol:empty:after{content:"暂无活动，敬请期待";line-height:400%;display:block;text-align:center}
+
+	.button{position:relative}
+	span.new{display:block;background-color:red;width:.5em;height:.5em;-webkit-border-radius:50%;position:absolute;top:2px;right:2px;overflow:hidden}
+
+	/*活动列表*/
+	#center-pays .content ol h5 span{position:absolute;right:0;font-size:.75em}
+	#center-pays .content ol h5{position:relative;margin:0;font-size:1em;line-height:200%}
+	#center-pays .content ol h5:before{content:"订单: "}
+	#center-pays .content ol h6{position:relative;margin:0;font-weight:400;font-size:.75em;line-height:200%}
+	#center-pays .content .pay_content:before{content:"商品: "}
+	#center-pays .content .pay_amount:before{content:"合计: "}
+	#center-pays .content .pay_created:before{content:"时间: "}
+	#center-pays .content .game_name:before{content:", "}
+	#center-pays .content .pay_result:before{content:", "}
+	#center-pays .content .pay_result.v-1:after{content:"发送失败"}
+	#center-pays .content .pay_result.v1:after{content:"发送中..."}
+	#center-pays .content .pay_result.v2:after{content:"发送成功"}
+	#center-pays .content ol li{margin:0;padding:.85em 1em;border-bottom:1px solid #eee}
+	#center-pays .content ol p{overflow:hidden;margin:0;color:#7f7f7f;text-overflow:ellipsis;white-space:nowrap;font-size:.75em;line-height:200%}
+	#center-pays .content ol{margin:0;padding:0;list-style:none}
+</style>
+
+<!-- 功能处理 -->
+<style>
+	/* 支付选中渠道锁定界面 */
+	#pay .protection p{margin:1.5em;padding:1em;background-color:red;color:#fff}
+	#pay .protection{position:fixed;top:0;right:0;bottom:0;left:0;z-index:999;background-color:rgba(255,255,255,.5)}
+	#pay:not(.lock) .protection{display:none}
+
+	.iOS #pay{display:none}
+
+	/* 试玩与正式功能显隐 */
+	#center-settings.acct_temped .button.center_modify_password{display:none}
+	#center-settings.acct_temped .button.center_modify_email{display:none}
+	#center-settings.acct_temped .button.center_modify_phone{display:none}
+	#center:not(.acct_temped) .button.register{display:none}
+	#login.acct_temped .user form{display:none}
+	#login.acct_temped .button.icon.forget-password{display:none}
+	#register:not(.playing) .guest-prompt{display:none}
+</style>
+
+<!-- 图标素材 -->
+<style>
+	.grey.icon.passport{background-image:url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjY2NjY2NjIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMmMtNS41MiAwLTEwIDQuNDgtMTAgMTBzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwLTQuNDgtMTAtMTAtMTB6bTAgM2MxLjY2IDAgMyAxLjM0IDMgM3MtMS4zNCAzLTMgMy0zLTEuMzQtMy0zIDEuMzQtMyAzLTN6bTAgMTQuMmMtMi41IDAtNC43MS0xLjI4LTYtMy4yMi4wMy0xLjk5IDQtMy4wOCA2LTMuMDggMS45OSAwIDUuOTcgMS4wOSA2IDMuMDgtMS4yOSAxLjk0LTMuNSAzLjIyLTYgMy4yMnoiLz48cGF0aCBkPSJNMCAwaDI0djI0aC0yNHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=)}
+	.grey.icon.password{background-image:url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjY2NjY2NjIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMCAwaDI0djI0aC0yNHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTIgMWwtOSA0djZjMCA1LjU1IDMuODQgMTAuNzQgOSAxMiA1LjE2LTEuMjYgOS02LjQ1IDktMTJ2LTZsLTktNHptLTIgMTZsLTQtNCAxLjQxLTEuNDEgMi41OSAyLjU4IDYuNTktNi41OSAxLjQxIDEuNDItOCA4eiIvPjwvc3ZnPg==)}
+	.grey.icon.forget-password{background-image:url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjY2NjY2NjIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMCAwaDI0djI0aC0yNHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTIgMTdjMS4xIDAgMi0uOSAyLTJzLS45LTItMi0yLTIgLjktMiAyIC45IDIgMiAyem02LTloLTF2LTJjMC0yLjc2LTIuMjQtNS01LTVzLTUgMi4yNC01IDVoMS45YzAtMS43MSAxLjM5LTMuMSAzLjEtMy4xIDEuNzEgMCAzLjEgMS4zOSAzLjEgMy4xdjJoLTkuMWMtMS4xIDAtMiAuOS0yIDJ2MTBjMCAxLjEuOSAyIDIgMmgxMmMxLjEgMCAyLS45IDItMnYtMTBjMC0xLjEtLjktMi0yLTJ6bTAgMTJoLTEydi0xMGgxMnYxMHoiLz48L3N2Zz4=)}
+	.grey.icon.register{background-image:url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjY2NjY2NjIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMCAwaDI0djI0aC0yNHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMTYgMTFjMS42NiAwIDIuOTktMS4zNCAyLjk5LTNzLTEuMzMtMy0yLjk5LTNjLTEuNjYgMC0zIDEuMzQtMyAzczEuMzQgMyAzIDN6bS04IDBjMS42NiAwIDIuOTktMS4zNCAyLjk5LTNzLTEuMzMtMy0yLjk5LTNjLTEuNjYgMC0zIDEuMzQtMyAzczEuMzQgMyAzIDN6bTAgMmMtMi4zMyAwLTcgMS4xNy03IDMuNXYyLjVoMTR2LTIuNWMwLTIuMzMtNC42Ny0zLjUtNy0zLjV6bTggMGMtLjI5IDAtLjYyLjAyLS45Ny4wNSAxLjE2Ljg0IDEuOTcgMS45NyAxLjk3IDMuNDV2Mi41aDZ2LTIuNWMwLTIuMzMtNC42Ny0zLjUtNy0zLjV6Ii8+PC9zdmc+)}
+	.grey.icon.trial{background-image:url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjY2NjY2NjIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMCAwaDI0djI0aC0yNHoiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNMjEgM2gtMThjLTEuMSAwLTIgLjktMiAydjEyYzAgMS4xLjkgMiAyIDJoNXYyaDh2LTJoNWMxLjEgMCAxLjk5LS45IDEuOTktMmwuMDEtMTJjMC0xLjEtLjktMi0yLTJ6bTAgMTRoLTE4di0xMmgxOHYxMnoiLz48L3N2Zz4=)}
+
+	.icon.back{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI\/Pg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJ3aGl0ZSIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgMjQgMjQiPg0KICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRoLTI0eiIgZmlsbD0ibm9uZSIvPg0KICAgIDxwYXRoIGQ9Ik0yMCAxMWgtMTIuMTdsNS41OS01LjU5LTEuNDItMS40MS04IDggOCA4IDEuNDEtMS40MS01LjU4LTUuNTloMTIuMTd2LTJ6Ii8+DQo8L3N2Zz4=)}
+	.icon.close{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI\/Pg0KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJ3aGl0ZSIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiPg0KCTxwYXRoIGQ9Ik0xOSA2LjQxbC0xLjQxLTEuNDEtNS41OSA1LjU5LTUuNTktNS41OS0xLjQxIDEuNDEgNS41OSA1LjU5LTUuNTkgNS41OSAxLjQxIDEuNDEgNS41OS01LjU5IDUuNTkgNS41OSAxLjQxLTEuNDEtNS41OS01LjU5eiIvPg0KCTxwYXRoIGQ9Ik0wIDBoMjR2MjRoLTI0eiIgZmlsbD0ibm9uZSIvPg0KPC9zdmc+)}
+	.black.icon.close{background-image:url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDA5Njg4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTkgNi40MWwtMS40MS0xLjQxLTUuNTkgNS41OS01LjU5LTUuNTktMS40MSAxLjQxIDUuNTkgNS41OS01LjU5IDUuNTkgMS40MSAxLjQxIDUuNTktNS41OSA1LjU5IDUuNTkgMS40MS0xLjQxLTUuNTktNS41OXoiLz48cGF0aCBkPSJNMCAwaDI0djI0aC0yNHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=)}
+	.black.icon.reset{background-image:url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDA5Njg4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTcuNjUgNi4zNWMtMS40NS0xLjQ1LTMuNDQtMi4zNS01LjY1LTIuMzUtNC40MiAwLTcuOTkgMy41OC03Ljk5IDhzMy41NyA4IDcuOTkgOGMzLjczIDAgNi44NC0yLjU1IDcuNzMtNmgtMi4wOGMtLjgyIDIuMzMtMy4wNCA0LTUuNjUgNC0zLjMxIDAtNi0yLjY5LTYtNnMyLjY5LTYgNi02YzEuNjYgMCAzLjE0LjY5IDQuMjIgMS43OGwtMy4yMiAzLjIyaDd2LTdsLTIuMzUgMi4zNXoiLz48cGF0aCBkPSJNMCAwaDI0djI0aC0yNHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=)}
+	a.icon{display:block;overflow:hidden;width:2em;height:2em;background-size:contain;background-repeat:no-repeat;background-position:center;-webkit-transform:translate3d(0,0,0)}
+</style>
+
+<!-- #if for android begin -->
+<!-- 版本兼容 -->
+<style>
+	body[version="1.0"] #pay .button.payWithWeixin{display:none}
+</style>
+<!-- #if for android end -->
+
+<!-- #if for debug begin -->
+<!-- 调试使用 -->
+<style>
+	body:not([version="0"]) #center-settings .button.logout,
+	body:not([version="0"]) #center .button.pay_test{display:none}
+	body[version="0"]{background:url(css/background.jpg) no-repeat center;background-size:contain;}
+</style>
+<!-- #if for debug end -->
+
+<!-- 历史遗留 -->
+<style>
+	#login .content{position:absolute;top:50%;left:50%;-webkit-box-sizing:border-box;margin-top:-7.75em;margin-left:-10em;width:20em;height:15.5em;-webkit-border-radius:.5em;background-color:#b7aca8;box-shadow:0 0 1em rgba(0,0,0,.5);-webkit-transform:translate3d(0,0,0)}
+	#login .wrapper{width:100%;height:15em;background-color:#fff;-webkit-border-radius:.5em;overflow:hidden}
+	#login .wrapper{background-image:url(css/iccgame.png);background-repeat:no-repeat;background-position:50% .75em;background-size:3.48em 2em}
+	#login .persisted{display:none}
+	#login form{margin:0 1em;padding:0;}
+	#login fieldset{margin:0;border:0;}
+	#login .user{margin-top:3.5em;border-bottom:1px solid #ddd;padding-bottom:0.75em;-webkit-box-sizing:border-box;}
+	#login .user input {margin-bottom:0.25em}
+	#login .user input:focus {border-color:#eb6100}
+	#login .user input[type="submit"] {border:solid 1px #eb6100;background-color:#eb6100;color:#fff;width:100%;height:2em;}
+	#login .functions{margin:0.25em 1em}
+	#login .button.icon{width:8em;display:inline-block;font-size:75%;text-align:center;padding-top:3em;color:#333;}
+	#login.absolute .content{margin-top:0;top:0;}
+	#login{overflow-y:scroll}
+
+	#login.acct_persisted .button.icon.forget-password:after{content:"找回密码>"}
+	#login.acct_persisted .button.icon.register:after{content:"快速注册>"}
+	#login.acct_persisted .button.icon.trial:after{content:"立即试玩>"}
+	#login.acct_persisted.acct_played .button.icon.trial:after{content:"立即登陆>"}
+	#login.acct_temped .button.icon.register:after{content:"转正账号>"}
+	#login.acct_temped .button.icon.trial:after{content:"继续试玩>"}
+	#login .button.icon{background-size:2.5em;background-position:50% 0.25em;background-repeat:no-repeat}
+	#login input.icon{background-size:1em 1em;background-position:100% 50%;background-repeat:no-repeat;background-origin:content-box}
+
+	.button:not(.icon):focus{outline:0}
+	.button:not(.icon):last-of-type{margin-bottom:0}
+	.button:not(.icon){margin:0 auto 12px auto;padding-bottom:.2em;width:60%;border:1px solid #c8c8c8;-webkit-border-radius:4px;background-color:#fff;box-shadow:0 -5px 0 #c8c8c8 inset;color:#222;text-align:center;font-size:22px;line-height:250%;cursor:pointer}
+	/* 个性修饰 */
+	#center-settings .content, #center .content, #pay .content{padding:1em}
+	#pay .button img{position:absolute;margin-top:10px}
+	input[type=number],input[type=password],input[type=text]{background-position:right center;background-size:48px 24px;background-repeat:no-repeat}
+
+	.alert {padding:8px 35px 8px 14px;margin-bottom:18px;color: #c09853;text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);background-color:#fcf8e3;border:1px solid #fbeed5;-webkit-border-radius:4px}
+	.alert-error {color: #b94a48;background-color: #f2dede;border-color: #eed3d7}
+	.alert:empty{display:none}
+
+	label.warning{text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);color:#b94a48;}
+</style>

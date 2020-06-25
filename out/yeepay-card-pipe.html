@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="jquery.min.js"></script>
+		<script src="iccgame.js"></script>
+		<style>
+			body{background-color:#f4f4f5;color:#4e5258;margin:16px;overflow:auto}
+			form p:last-of-type{margin:2em 0 2em 0;text-align:center}
+			form{overflow:auto}
+			h1{font-size:24px;font-weight:400;line-height:200%;margin:0;text-align:center}
+			h4{color:gray;font-size:16px;font-weight:400;margin:16px 0 0 0}
+			input[type=submit]{background-color:#f2c156;border-radius:5px;border:none;box-sizing:border-box;color:#fff;font-size:16px;outline:0;height:2.5em;width:80%}
+			input[type=submit]:hover{background-color:#dca631}
+			input[type=text],select{border:solid #dfdfdf 1px;box-sizing:border-box;font-size:16px;height:2.5em;outline:0;padding:0 .5em;width:100%}
+			input[type=text]:focus,select:focus{border:solid gray 1px}
+			input[type=text]{width:100%}
+			label{line-height:150%}
+			p{margin:.5em 0 1em 0}
+			select[name=card_amount]{margin-left:2%}
+			select{width:49%}
+			ul{color:gray;font-size:16px;margin:0}
+		</style>
+	</head>
+	<body>
+		<form action="/index.php?">
+			<h1>手机卡充值</h1>
+			<p><label>类型</label><br/><select name="card_type">
+					<option value="TELECOM">电信卡</option>
+					<option value="SZX" selected="selected">神州行</option>
+					<option value="UNICOM">联通卡</option>
+				</select><select name="card_amount">
+					<option value="10">10 元</option>
+					<option value="20">20 元</option>
+					<option value="30">30 元</option>
+					<option value="50">50 元</option>
+					<option value="100" selected="selected">100 元</option>
+					<option value="200">200 元</option>
+					<option value="300">300 元</option>
+					<option value="500">500 元</option>
+					<option value="1000">1,000 元</option>
+				</select></p>
+			<p><label>卡号</label><br/><input type="text" name="card_number" placeholder="请输入充值卡卡号" maxlength="32"/></p>
+			<p><label>密码</label><br/><input type="text" name="card_password" placeholder="请输入充值卡密码" maxlength="32"/></p>
+			<p><input type="submit" value="充值"/></p>
+		</form>
+		<p></p>
+		<h4>注意：</h4>
+		<ul>
+			<li>如果充值金额小于支付金额，则会将充值金额直接存入账户余额。</li>
+			<li>如果充值金额大于支付金额，成功后，多余金额将存入账户余额。</li>
+			<li>账户余额可以再次支付使用。</li>
+		</ul>
+		<div class=""></div>
+	</body>
+
+</html>

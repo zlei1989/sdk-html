@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ICCGAME</title>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="format-detection" content="email=no"/>
+		<meta name="format-detection" content="telephone=no"/>
+		<script src="src.local/jquery/jquery.js"></script>
+		<script src="src.local/jquery/jquery.md5.js"></script>
+		<script src="src.local/VersionControl.js"></script>
+		<script src="src.local/VersionControl.Loader.js"></script>
+		<script>
+			// 执行代码
+			if (localStorage["CODE_BOOTSTRAP"]) {
+				console.log("run cache bootstrap");
+				window.eval(localStorage["CODE_BOOTSTRAP"]);
+			} else {
+				console.log("run local bootstrap");
+				window.eval(window.CODE_BOOTSTRAP);
+			}
+			// 初始调用
+			if ("ICCGAME_VersionControl" in window === false) {
+				window.ICCGAME_VersionControl = new VersionControl();
+				window.ICCGAME_VersionControl.upgradeURL = "version.local.json";
+				window.ICCGAME_VersionControl.bootstrap();
+			}
+		</script>
+	</head><body oncontextmenu="return false"></body>
+</html>
